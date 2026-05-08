@@ -24,8 +24,8 @@ We believe in building things that are **simple, useful, and sustainable**. No b
 
 | Proyecto | Descripción |
 |----------|-------------|
-| **[OPITA OS / Studio](https://github.com/Opita-Code/opita-runtime)** | Runtime gobernado con IA — SDD workflow, cadena de providers, vault encriptado, plugin ecosystem |
-| **[Opita Sync](https://github.com/Opita-Code/opita-sync-framework)** | Framework de contratos gobernados — policy, runtime, evidencia y superficies de operador |
+| **[OPITA Runtime](https://github.com/Opita-Code/opita-runtime)** | Motor de ejecución gobernada con IA — SDD workflow, provider chain, vault encriptado |
+| **[Opita Sync Framework](https://github.com/Opita-Code/opita-sync-framework)** | Kernel reusable de contratos gobernados — policy, runtime, evidencia y superficies de operador |
 | **[Vibe-Studio](https://vibe.opitacode.com)** | Vibe-coding en español para estudiantes — crea apps sin saber inglés |
 | **[www.opitacode.com](https://github.com/Opita-Code/www.opitacode.com)** | Nuestra landing y presencia pública |
 
