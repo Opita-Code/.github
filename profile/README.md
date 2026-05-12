@@ -4,30 +4,40 @@
 
 ---
 
-## 🇨🇴 Sobre nosotros
+## 🇨🇴 Nuestra Visión
 
-Opita Code construye software, automatizaciones y productos SaaS para negocios reales, emprendedores y creadores — diseñado desde Colombia con contexto local y ambición global.
+Opita Code construye software, automatizaciones y productos SaaS. Creemos en hacer las cosas **simples, útiles y sostenibles**. Nada de soluciones infladas ni tecnología por moda — solo lo que resuelve problemas de verdad.
 
-Creemos en hacer las cosas **simples, útiles y sostenibles**. Nada de soluciones infladas ni tecnología por moda — solo lo que resuelve problemas de verdad.
-
----
-
-## 🇺🇸 About us
-
-Opita Code builds practical software, automations, and SaaS products for real businesses, entrepreneurs, and creators — designed from Colombia with local context and global ambition.
-
-We believe in building things that are **simple, useful, and sustainable**. No bloated solutions or tech for tech's sake — just what solves real problems.
+Desarrollamos con arquitectura limpia, TDD estricto, y nuestra metodología **Spec-Driven Development (SDD)** impulsada por agentes IA.
 
 ---
 
-## 🛠️ Lo que hacemos / What we build
+## 🇺🇸 Our Vision
 
-| Proyecto | Descripción |
+Opita Code builds practical software, automations, and SaaS products. We believe in building things that are **simple, useful, and sustainable**. No bloated solutions or tech for tech's sake — just what solves real problems.
+
+We build using clean architecture, strict TDD, and our AI-driven **Spec-Driven Development (SDD)** methodology.
+
+---
+
+## 🛠️ Ecosistema / Ecosystem
+
+Nuestro ecosistema está dividido en herramientas internas y productos públicos, regidos por la gobernanza de [Opita OS](https://github.com/Opita-Code/opita-os).
+
+| Producto | Descripción |
 |----------|-------------|
-| **[OPITA Runtime](https://github.com/Opita-Code/opita-runtime)** | Motor de ejecución gobernada con IA — SDD workflow, provider chain, vault encriptado |
-| **[Opita Sync Framework](https://github.com/Opita-Code/opita-sync-framework)** | Kernel reusable de contratos gobernados — policy, runtime, evidencia y superficies de operador |
-| **[Vibe-Studio](https://vibe.opitacode.com)** | Vibe-coding en español para estudiantes — crea apps sin saber inglés |
-| **[www.opitacode.com](https://github.com/Opita-Code/www.opitacode.com)** | Nuestra landing y presencia pública |
+| **[Vibe Studio](https://vibe.opitacode.com)** | Vibe-coding en español para estudiantes. Crea aplicaciones de producción sin escribir código manualmente, asistido por IA gobernada. |
+| **[Opita OS](https://github.com/Opita-Code/opita-os)** | *(Privado)* El núcleo de nuestra organización. Contiene el Single Source of Truth (OpenSpec), el motor de Facturación (Wompi) e Identidad SSO. |
+| **[Opitacode Web](https://www.opitacode.com)** | Plataforma educativa, landing pública e información legal. |
+
+---
+
+## 🚀 Metodología y Estándares
+
+En Opita Code trabajamos bajo los más estrictos estándares de ingeniería, adaptados para la era de la IA:
+- **Spec-Driven Development (SDD)**: Escribimos *Specs* (OpenSpec) antes de cualquier línea de código.
+- **Tipado Estricto**: Cero tolerancia al uso de `any` ("Tipado Argentino").
+- **Agentes Contextuales**: Nuestros agentes IA actúan basándose en el registro centralizado de *skills* y directrices de nuestro workspace.
 
 ---
 
