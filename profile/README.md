@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo-v4.png" width="150" alt="Opita Code Logo v4">
+</p>
+
 # 👋 ¡Somos Opita Code!
 
 **Software práctico para negocios reales, desde Neiva, Colombia.**
