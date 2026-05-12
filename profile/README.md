@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="official-logo.png" width="150" alt="Opita Code Logo v4">
+  <img src="official-logo-white.png" width="150" alt="Opita Code Logo v4 White">
 </p>
 
 # 👋 ¡Somos Opita Code!
