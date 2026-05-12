@@ -36,7 +36,7 @@ Nuestro ecosistema está dividido en herramientas internas y productos públicos
 
 En Opita Code trabajamos bajo los más estrictos estándares de ingeniería, adaptados para la era de la IA:
 - **Spec-Driven Development (SDD)**: Escribimos *Specs* (OpenSpec) antes de cualquier línea de código.
-- **Tipado Estricto**: Cero tolerancia al uso de `any` ("Tipado Argentino").
+- **Tipado Estricto**: Cero tolerancia al uso de tipos débiles (`any`). Todo debe estar tipado bajo estándares TypeScript.
 - **Agentes Contextuales**: Nuestros agentes IA actúan basándose en el registro centralizado de *skills* y directrices de nuestro workspace.
 
 ---
