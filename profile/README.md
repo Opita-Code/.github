@@ -44,7 +44,7 @@ En Opita Code trabajamos bajo los más estrictos estándares de ingeniería, ada
 ## 🌎 Conectá con nosotros / Connect with us
 
 - 🌐 [opitacode.com](https://www.opitacode.com)
-- 📺 [Opita Developer](https://youtube.com/@opitadeveloper) — contenido, streams, comunidad
+- 📺 [Nicolás Urrutia - Founder](https://www.linkedin.com/in/nicourrutia98/)
 - 📍 Neiva, Huila, Colombia
 
 ---
