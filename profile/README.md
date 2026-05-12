@@ -1,58 +1,54 @@
 <p align="center">
-  <img src="official-logo-white.png" width="150" alt="Opita Code Logo v4 White">
+  <img src="official-logo-white.png" width="160" alt="Opita Code Logo v4">
 </p>
 
-# 👋 ¡Somos Opita Code!
+# Opita Code
 
-**Software práctico para negocios reales, desde Neiva, Colombia.**
-
----
-
-## 🇨🇴 Nuestra Visión
-
-Opita Code construye software, automatizaciones y productos SaaS. Creemos en hacer las cosas **simples, útiles y sostenibles**. Nada de soluciones infladas ni tecnología por moda — solo lo que resuelve problemas de verdad.
-
-Desarrollamos con arquitectura limpia, TDD estricto, y nuestra metodología **Spec-Driven Development (SDD)** impulsada por agentes IA.
+> 🇨🇴 **Software práctico para negocios reales.** Construido desde Colombia con identidad local y ambición global.
+>
+> 🇺🇸 **Practical software for real businesses.** Built from Colombia with local identity and global ambition.
 
 ---
 
-## 🇺🇸 Our Vision
+## 🏗️ Ecosistema / Ecosystem
 
-Opita Code builds practical software, automations, and SaaS products. We believe in building things that are **simple, useful, and sustainable**. No bloated solutions or tech for tech's sake — just what solves real problems.
+Nuestro ecosistema está dividido en herramientas internas y productos públicos. Todo el código sigue estándares de arquitectura limpia y está gobernado por nuestro sistema central **OpenSpec**.
 
-We build using clean architecture, strict TDD, and our AI-driven **Spec-Driven Development (SDD)** methodology.
-
----
-
-## 🛠️ Ecosistema / Ecosystem
-
-Nuestro ecosistema está dividido en herramientas internas y productos públicos, regidos por la gobernanza de [Opita OS](https://github.com/Opita-Code/opita-os).
-
-| Producto | Descripción |
-|----------|-------------|
-| **[Vibe Studio](https://vibe.opitacode.com)** | Vibe-coding en español para estudiantes. Crea aplicaciones de producción sin escribir código manualmente, asistido por IA gobernada. |
-| **[Opita OS](https://github.com/Opita-Code/opita-os)** | *(Privado)* El núcleo de nuestra organización. Contiene el Single Source of Truth (OpenSpec), el motor de Facturación (Wompi) e Identidad SSO. |
-| **[Opitacode Web](https://www.opitacode.com)** | Plataforma educativa, landing pública e información legal. |
+| Capa / Layer | Repositorio | Descripción / Description | Tecnologías |
+|--------------|-------------|---------------------------|-------------|
+| **Núcleo & Infra** | **[`opita-os`](https://github.com/Opita-Code/opita-os)** 🔒 | *(Privado)* El "sistema operativo" de la organización. Contiene la fuente de la verdad (OpenSpec), el motor de marca (Brand Engine), SSO y Facturación. | Node.js, SVGO, Sharp |
+| **Producto SaaS** | **[`opita-vibe-studio`](https://vibe.opitacode.com)** | Vibe-coding en español. Entorno de desarrollo para crear aplicaciones de producción asisitido por IA gobernada. | Tauri v2, React, TypeScript |
+| **Web Pública** | **[`opitacode-web`](https://github.com/Opita-Code/opitacode-web)** | Plataforma educativa, landing pública corporativa e información legal. | HTML/CSS plano, AWS SAM, S3 |
 
 ---
 
-## 🚀 Metodología y Estándares
+## 🚀 Metodología y Gobernanza / Methodology & Governance
 
-En Opita Code trabajamos bajo los más estrictos estándares de ingeniería, adaptados para la era de la IA:
-- **Spec-Driven Development (SDD)**: Escribimos *Specs* (OpenSpec) antes de cualquier línea de código.
-- **Tipado Estricto**: Cero tolerancia al uso de tipos débiles (`any`). Todo debe estar tipado bajo estándares TypeScript.
-- **Agentes Contextuales**: Nuestros agentes IA actúan basándose en el registro centralizado de *skills* y directrices de nuestro workspace.
+Trabajamos bajo los más estrictos estándares de ingeniería para la era de la IA, asegurando que las máquinas sigan nuestra visión, y no al revés.
+
+### 🇨🇴 Gobernanza de IA
+- **Spec-Driven Development (SDD):** Escribimos las especificaciones (*Specs* en OpenSpec) antes de generar cualquier línea de código. 
+- **Agentes Contextuales:** Usamos registros centralizados de *skills* (Engram) para que la IA actúe bajo los estándares estrictos de nuestro workspace.
+
+### 🇺🇸 AI Governance
+- **Spec-Driven Development (SDD):** We write technical specifications (*OpenSpecs*) before any code is generated.
+- **Contextual Agents:** We use centralized *skills* registries (Engram) to ensure AI acts strictly under our workspace standards.
 
 ---
 
 ## 🌎 Conectá con nosotros / Connect with us
 
-- 🌐 [opitacode.com](https://www.opitacode.com)
-- 📺 [Nicolás Urrutia - Founder](https://www.linkedin.com/in/nicourrutia98/)
-- 📍 Neiva, Huila, Colombia
+| Canal / Channel | Enlace / Link |
+|-----------------|---------------|
+| 🌐 **Sitio Web** | [opitacode.com](https://www.opitacode.com) |
+| 🧑‍💻 **Founder** | [Nicolás Urrutia](https://www.linkedin.com/in/nicourrutia98/) |
+| 📍 **Sede** | Neiva, Huila, Colombia |
 
 ---
 
 <p align="center">
-  <i>Hecho con orgullo colombiano 🇨🇴 · Built with Colombian pride</i>
+  <br>
+  © 2026 Opita Code · Juan Nicolás Urrutia Salcedo
+  <br>
+  <i>Hecho con orgullo colombiano 🇨🇴 · Made in Colombia</i>
 </p>
