@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="official-logo-white.png" width="160" alt="Opita Code Logo v4">
-</p>
 
 # Opita Code
 
