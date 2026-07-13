@@ -6,45 +6,95 @@
 
 ---
 
-## 🏗️ Ecosistema / Ecosystem
+## 🧠 Nuestro kernel: MCP-research + Vibe-Flow
 
-Construimos software gobernado por especificación (Spec-Driven Development) y persiguiendo un único criterio: que las máquinas ejecuten nuestra visión, no al revés. Todo nuestro código sigue estándares de arquitectura limpia y se construye sobre nuestro sistema central **OpenSpec** (`opita-os`, privado).
+Toda nuestra organización gira en torno a **un solo par de productos**: **MCP-research** (el servidor MCP que conecta nuestros agentes IA con backends OSINT, vibe-flow CRUD y *dark-ssd* LLM-as-judge) y **Vibe-Flow** (la modalidad de desarrollo: *spec → artifact → drift → reconcile → publish*, con cada cambio versionado en OpenSpec y cada artefacto auditado por un juez LLM antes de publicarse).
 
-| Capa / Layer | Repositorio | Descripción / Description | Stack |
-|--------------|-------------|---------------------------|-------|
-| 🏛️ **Núcleo** | **[`opita-os`](https://github.com/Opita-Code/opita-os)** 🔒 | *(Privado)* El "sistema operativo" de la organización. Contiene la fuente de la verdad (**OpenSpec**), el motor de marca (**Brand Engine**), SSO y Facturación. | Node.js, SVGO, Sharp |
-| 🔧 **Infra pública** | **[`dark-research-mcp`](https://github.com/Opita-Code/dark-research-mcp)** | Servidor MCP que entrega a un agente IA 45 herramientas especializadas: OSINT (15), vibe-flow CRUD (22) y dark-ssd LLM-as-judge (8). Binario Go único sobre stdio. SQLite-backed `dark.db` compartido con `dark-eval`. | Go 1.22+ |
-| 🔧 **Infra pública** | **[`ocais`](https://github.com/Opita-Code/ocais)** | **OCAIS — Opita Code AI Stream.** SDK de streaming de IA para AWS Lambda. ~15 KB, zero deps, TypeScript-first. SSE first-class, AbortSignal + timeout, structured output (Zod), tool execution multi-step. | TypeScript, AWS Lambda |
-| 🎨 **SaaS** | **[`opita-vibe-studio`](https://github.com/Opita-Code/opita-vibe-studio)** ([vibe.opitacode.com](https://vibe.opitacode.com)) | Vibe-coding **en español** para estudiantes y creadores. IDE con IA en navegador + desktop (Tauri v2). React 18, SST v4, multi-provider (DeepSeek + Gemini + OpenAI + Anthropic), BYOK. | Tauri v2, React, TypeScript |
-| 🌐 **Apps verticales** | **[`opita-market`](https://github.com/Opita-Code/opita-market)** ([market.opitacode.com](https://market.opitacode.com)) | Marketplace multi-vertical colombiano. Dashboard de precios en tiempo real + directorio + comparador. B2B + B2C. Compliance Ley 1581/2012 (Habeas Data) desde el día 1. | Astro 6, SST Router, Aurora Postgres, DynamoDB |
-| 🌐 **Apps verticales** | **[`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app)** | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y 10 diálogos en streaming con `@opita/ocais`. | Astro 6 + React 19 islands, SST v3, Hono 4 |
-| 🌐 **Apps verticales** | **[`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web)** | Portfolio y sitio de identidad de marca del *Opita Developer*. Astro con estética *cyberpunk/gamer* orientado a product architects y desarrolladores. Terminal interactiva + diagramas de arquitectura en vivo. | Astro, React, Framer Motion |
-| 📚 **Web pública** | **[`www.opitacode.com`](https://github.com/Opita-Code/www.opitacode.com)** ([opitacode.com](https://www.opitacode.com)) | Superficie pública corporativa. Astro v2 (en migración) + frontend HTML plano legado + AWS SAM (contact form) + Supabase. Magic Link auth compartido con `vibe-ai-backend`. | Astro, HTML/CSS, AWS SAM, Supabase |
+El resto de la organización son **productos verticales** que demuestran ese kernel, o **SDKs** que lo extienden. No construimos software sin pasar por el kernel.
 
-### 📦 Archivado — reemplazados por `opita-os` / Archived — superseded by `opita-os`
+```mermaid
+graph TD
+    OS["🏛️ opita-os 🔒<br/>OpenSpec · Brand Engine · Vault · SSO"]
+    MCP["⚙️ dark-research-mcp<br/>45 MCP tools<br/>(15 OSINT · 22 vibe-flow CRUD · 8 dark-ssd judges)"]
+    SDK["📦 @opita/ocais<br/>AI streaming SDK para AWS Lambda"]
+    VS["🎨 opita-vibe-studio<br/>IDE de vibe-coding en español"]
+    MK["🌐 opita-market<br/>Marketplace colombiano B2B+B2C"]
+    SO["🏛️ sociedad-opita-app<br/>Monumento digital del opita"]
+    DW["🧑‍💻 opita-developer-web<br/>Portfolio del Opita Developer"]
+    WEB["📚 www.opitacode.com<br/>Landing corporativa"]
+    
+    OS -->|runtime · specs| MCP
+    MCP -->|consume kernel| VS
+    MCP -->|vibe-flow| MK
+    MCP -->|specs + drift| SO
+    MCP -->|specs| DW
+    SDK -->|streamText| SO
+    SDK -->|streamText| VS
+    VS -->|embed| WEB
+    MK -->|serve| WEB
+    SO -->|serve| WEB
+```
 
-Repos congelados como referencia histórica. La lógica que contenían migró al núcleo privado.
+---
 
-| Repositorio | Estado | Descripción / Description | Stack |
-|-------------|--------|---------------------------|-------|
-| **[`opita-runtime`](https://github.com/Opita-Code/opita-runtime)** | 🔒 archive | Motor de ejecución gobernada. SDD workflow, provider chain, encrypted vault AES-256-GCM, plugin ecosystem con trust classes y risk tiers. 15+ stores. Rewrite in Rust (WIP, en `rust-runtime/`). Reemplazado por `opita-os`. | Node.js ESM, Rust (WIP) |
+## ⚙️ El kernel y sus extensiones / The kernel & its extensions
+
+Estos tres repos **son** la organización. El resto son productos verticales que los consumen.
+
+| Capa / Layer | Repositorio | Rol dentro del kernel / Role in the kernel |
+|--------------|-------------|---------------------------------------------|
+| 🏛️ **Runtime privado** | **[`opita-os`](https://github.com/Opita-Code/opita-os)** 🔒 | La fuente de verdad. Contiene **OpenSpec** (donde viven las specs), el **Brand Engine**, vault encriptado, SSO y Facturación. Es el runtime que sostiene al MCP público. |
+| ⚙️ **Kernel MCP público** | **[`dark-research-mcp`](https://github.com/Opita-Code/dark-research-mcp)** | Servidor MCP (Go, stdio) que entrega **45 herramientas** a un agente IA: 15 de OSINT, 22 de vibe-flow CRUD (spec/artifact/drift CRUD), y 8 dark-ssd LLM-as-judge (brand match, compliance, drift detection, grounding, PII, prompt-injection, consensus). SQLite-backed `dark.db` compartido con `dark-eval`. |
+| 📦 **SDK de streaming** | **[`ocais`](https://github.com/Opita-Code/ocais)** | **OCAIS — Opita Code AI Stream.** SDK de streaming IA para AWS Lambda (~15 KB, zero deps, TypeScript-first). SSE first-class, AbortSignal + timeoutMs, structured output (Zod), tool execution multi-step. Lo consumen `vibe-studio` y `sociedad-opita-app` para su backend. |
+
+---
+
+## 🛰️ Productos verticales (consumen el kernel) / Vertical products (consume the kernel)
+
+Cada producto demuestra una faceta distinta del kernel. Ninguno se construye fuera de la metodología vibe-flow.
+
+| Producto | Repositorio | Demo en vivo | Qué demuestra del kernel |
+|----------|-------------|--------------|---------------------------|
+| 🎨 **Vibe Studio** | **[`opita-vibe-studio`](https://github.com/Opita-Code/opita-vibe-studio)** | [vibe.opitacode.com](https://vibe.opitacode.com) | IDE de vibe-coding **en español** para estudiantes y creadores. Browser + desktop (Tauri v2). React 18, SST v4, multi-provider (DeepSeek + Gemini + OpenAI + Anthropic), BYOK. Consume el kernel MCP para governar cada generación. |
+| 🌐 **Opita Market** | **[`opita-market`](https://github.com/Opita-Code/opita-market)** | [market.opitacode.com](https://market.opitacode.com) | Marketplace multi-vertical colombiano (B2B+B2C). Dashboard de precios en tiempo real, directorio y comparador. **Astro 6 + SST Router + Aurora Postgres + DynamoDB**. Compliance Ley 1581/2012 (Habeas Data) desde el día 1 — el primer producto donde vibe-flow gates un MVP regulado. |
+| 🏛️ **Sociedad Opita** | **[`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app)** | — | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y 10 diálogos en streaming con `@opita/ocais`. Astro 6 + React 19 islands + SST v3 + Hono 4. |
+| 🧑‍💻 **Developer Web** | **[`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web)** | — | Portfolio y sitio de identidad del *Opita Developer*. Astro con estética *cyberpunk/gamer*, terminal interactiva, diagramas de arquitectura en vivo. Construido con vibe-flow como vitrina del kernel. |
+| 📚 **Web pública** | **[`www.opitacode.com`](https://github.com/Opita-Code/www.opitacode.com)** | [opitacode.com](https://www.opitacode.com) | Superficie pública corporativa. Astro v2 (en migración desde HTML plano) + AWS SAM + Supabase. Magic Link auth compartido con `vibe-ai-backend`. |
+
+---
+
+## 📦 Archivado — reemplazados por `opita-os` / Archived — superseded by `opita-os`
+
+Repos congelados como referencia histórica. La lógica que contenían migró al núcleo privado. No los usamos activamente.
+
+| Repositorio | Estado | Qué contenía / What it contained | Stack |
+|-------------|--------|----------------------------------|-------|
+| **[`opita-runtime`](https://github.com/Opita-Code/opita-runtime)** | 🔒 archive | Motor de ejecución gobernada. SDD workflow, provider chain, encrypted vault AES-256-GCM, plugin ecosystem con trust classes y risk tiers, 15+ stores. Rewrite in Rust (WIP en `rust-runtime/`). Reemplazado por `opita-os`. | Node.js ESM, Rust (WIP) |
 | **[`opita-sync-framework`](https://github.com/Opita-Code/opita-sync-framework)** | 🔒 archive | **Opita Sync Framework (OSF)** — kernel reusable de gobernanza: contracts, policy, runtime, evidence y operator surfaces. Opcional PostgreSQL (persistencia) y Cerbos (PDP). Reemplazado por `opita-os`. | Go 1.24+ |
 
 ---
 
-## 🚀 Metodología y Gobernanza / Methodology & Governance
+## 🔁 Cómo producimos cada producto / How we ship every product
 
-Trabajamos bajo los más estrictos estándares de ingeniería para la era de la IA, asegurando que las máquinas sigan nuestra visión, y no al revés.
+```
+   spec  →  artifact  →  drift  →  reconcile  →  publish
+    ↑          ↓            ↓          ↓            ↓
+ OpenSpec   log/upload   dark_ssd   spec ↔ artifact   has_disclosure=true
+                                                    ↑
+                                          dark_ssd_compliance_check
+                                          dark_ssd_pii_detect
+                                          dark_ssd_prompt_injection_scan
+```
 
 ### 🇨🇴 Gobernanza de IA
-- **Spec-Driven Development (SDD):** Escribimos las especificaciones (*Specs* en OpenSpec) **antes** de generar cualquier línea de código. Cada cambio importante vive como un *change* versionado en `openspec/changes/`.
-- **Agentes Contextuales:** Usamos registros centralizados de *skills* (Engram) y herramientas MCP (`dark-research-mcp`) para que la IA actúe bajo los estándares estrictos de nuestro workspace.
-- **LLM-as-judge:** Antes de publicar artefactos críticos (videos sintéticos, contenido EU, generación de código), un juez LLM audita contra specs, jurisdicciones y compliance. Cada verdict queda persistido para auditoría.
+- **MCP-research es nuestro sistema nervioso:** cada agente que escribe código (en OpenSpec, en vibe-studio, en cualquier producto) tiene acceso al mismo set de 45 herramientas MCP — no duplicamos lógica entre repos.
+- **Vibe-Flow es nuestra modalidad de desarrollo:** escribimos la *spec* (en OpenSpec) **antes** de generar una sola línea. Cada artefacto se *loggea* con `dark_research_artifact_log`. Un juez LLM (`dark_ssd_drift_judge`) compara artefacto contra spec y emite verdict (`aligned | drift_detected | needs_human`). Sin `reconciled_at`, no hay publish.
+- **LLM-as-judge, no LLM-as-author:** publicamos artefactos críticos (synthetic media, contenido EU, código generado) solo después de que un juez LLM los audite contra specs, jurisdicciones y compliance. Cada verdict queda persistido en `sdd_evaluations` para auditoría.
 
 ### 🇺🇸 AI Governance
-- **Spec-Driven Development (SDD):** We write technical specifications (*OpenSpecs*) before any code is generated. Every meaningful change lives as a versioned `openspec/changes/` artifact.
-- **Contextual Agents:** We use centralized *skills* registries (Engram) and MCP tooling (`dark-research-mcp`) so AI acts strictly under our workspace standards.
-- **LLM-as-judge:** Before publishing critical artifacts (synthetic video, EU-jurisdiction content, generated code), an LLM judge audits against specs, jurisdictions, and compliance. Every verdict is persisted for audit.
+- **MCP-research is our nervous system:** every agent that writes code — whether for OpenSpec, Vibe Studio, or any vertical product — has access to the same 45 MCP tools. We don't duplicate logic across repos.
+- **Vibe-Flow is our development modality:** we write the *spec* (in OpenSpec) **before** generating a single line. Each artifact is *logged* via `dark_research_artifact_log`. An LLM judge (`dark_ssd_drift_judge`) compares the artifact against its spec and emits a verdict (`aligned | drift_detected | needs_human`). No `reconciled_at`, no publish.
+- **LLM-as-judge, not LLM-as-author:** we publish critical artifacts (synthetic media, EU-jurisdiction content, generated code) only after an LLM judge audits them against specs, jurisdictions, and compliance. Every verdict is persisted in `sdd_evaluations` for audit.
 
 ---
 
