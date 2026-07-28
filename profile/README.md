@@ -1,111 +1,118 @@
 # Opita Code
 
-> 🇨🇴 **Software práctico para negocios reales.** Construido desde Colombia con identidad local y ambición global.
+> **Software práctico para negocios reales.** Construido desde Colombia con identidad local y ambición global.
 >
-> 🇺🇸 **Practical software for real businesses.** Built from Colombia with local identity and global ambition.
+> **Practical software for real businesses.** Built from Colombia with local identity and global ambition.
 
 ---
 
-## 🧠 Nuestro kernel: MCP-research + Vibe-Flow
+## El kernel: dark-memory-mcp + Vibe-Flow
 
-Toda nuestra organización gira en torno a **un solo par de productos**: **MCP-research** (el servidor MCP que conecta nuestros agentes IA con backends OSINT, vibe-flow CRUD y *dark-ssd* LLM-as-judge) y **Vibe-Flow** (la modalidad de desarrollo: *spec → artifact → drift → reconcile → publish*, con cada cambio versionado en OpenSpec y cada artefacto auditado por un juez LLM antes de publicarse).
+Toda la organización gira en torno a **un par de productos canónicos**: **dark-memory-mcp** (el servidor MCP que entrega governance + memory + research + vibe-flow como un set unificado de 34+ herramientas) y **Vibe-Flow** (la modalidad de desarrollo: *spec → artifact → drift → reconcile → publish*, con cada cambio versionado en OpenSpec y cada artefacto auditado por un juez LLM antes de publicarse).
 
 El resto de la organización son **productos verticales** que demuestran ese kernel, o **SDKs** que lo extienden. No construimos software sin pasar por el kernel.
 
+### Estado actual del kernel (2026-07-28)
+
+| Componente | Repositorio | Estado |
+|---|---|---|
+| **Kernel MCP canónico** | [`dark-memory-mcp`](https://github.com/Opita-Code/dark-memory-mcp) | **Activo** — v2.2.0. 34 herramientas canónicas + 3 opcionales L7-REDTEAM. Schema v18. Policy Gateway + Agent Memory data plane. |
+| **Backend OSINT + jueces LLM** | [`dark-research-mcp`](https://github.com/Opita-Code/dark-research-mcp) | **Consolidándose** — v0.7.2 (2026-07-28 README-restoration). v0.7.0 introdujo 38 deprecation shims que delegan al namespace `RESEARCH` de dark-memory-mcp. Los backends OSINT y los jueces LLM viven aquí todavía; la superficie canónica vive en dark-memory-mcp. |
+| **Runtime privado** | `opita-os` (privado) | SSOT, OpenSpec, Brand Engine, vault cifrado, SSO. Sostiene a todos los productos verticales. |
+| **SDK streaming IA** | [`ocais`](https://github.com/Opita-Code/ocais) | **Activo** — `@opitacode/ocais` v3.0.1 (publicado en npm). SDK de streaming para AWS Lambda, consumido por vibe-studio y sociedad-opita-app. |
+
 ```mermaid
 graph TD
-    OS["🏛️ opita-os 🔒<br/>OpenSpec · Brand Engine · Vault · SSO"]
-    MCP["⚙️ dark-research-mcp<br/>45 MCP tools<br/>(15 OSINT · 22 vibe-flow CRUD · 8 dark-ssd judges)"]
-    SDK["📦 @opita/ocais<br/>AI streaming SDK para AWS Lambda"]
-    VS["🎨 opita-vibe-studio<br/>IDE de vibe-coding en español"]
-    MK["🌐 opita-market<br/>Marketplace colombiano B2B+B2C"]
-    SO["🏛️ sociedad-opita-app<br/>Monumento digital del opita"]
-    DW["🧑‍💻 opita-developer-web<br/>Portfolio del Opita Developer"]
-    WEB["📚 www.opitacode.com<br/>Landing corporativa"]
-    
-    OS -->|runtime · specs| MCP
-    MCP -->|consume kernel| VS
-    MCP -->|vibe-flow| MK
-    MCP -->|specs + drift| SO
-    MCP -->|specs| DW
-    SDK -->|streamText| SO
-    SDK -->|streamText| VS
-    VS -->|embed| WEB
-    MK -->|serve| WEB
-    SO -->|serve| WEB
+    OS["opita-os (privado)<br/>OpenSpec · Brand Engine · Vault · SSO"]
+    DM["dark-memory-mcp<br/>34+ herramientas canónicas<br/>(RESEARCH · JUDGE · VIBE · AGENT_MEMORY)"]
+    DR["dark-research-mcp<br/>13 OSINT backends<br/>(shims hacia dark-memory-mcp)"]
+    SDK["@opitacode/ocais<br/>Streaming SDK para AWS Lambda"]
+    VS["opita-vibe-studio<br/>IDE de vibe-coding en español"]
+    SO["sociedad-opita-app<br/>Monumento digital del opita"]
+    DEV["opita-developer-web<br/>Portfolio del Opita Developer"]
+    WEB["www.opitacode.com<br/>Landing corporativa"]
+    MK["opita-market (privado)<br/>Marketplace colombiano B2B+B2C"]
+
+    OS -.runtime + specs.-> DM
+    DR -.deprecation shims v0.7.0+ consolidate into.-> DM
+    DM -.consume kernel.-> VS
+    DM -.consume kernel.-> MK
+    DM -.consume kernel.-> SO
+    SDK -.streamText.-> VS
+    SDK -.streamText.-> SO
+    VS -.embed.-> WEB
+    MK -.serve.-> WEB
+    SO -.serve.-> WEB
+    DEV -.stand-alone.-> WEB
 ```
 
 ---
 
-## ⚙️ El kernel y sus extensiones / The kernel & its extensions
-
-Estos tres repos **son** la organización. El resto son productos verticales que los consumen.
-
-| Capa / Layer | Repositorio | Rol dentro del kernel / Role in the kernel |
-|--------------|-------------|---------------------------------------------|
-| 🏛️ **Runtime privado** | **[`opita-os`](https://github.com/Opita-Code/opita-os)** 🔒 | La fuente de verdad. Contiene **OpenSpec** (donde viven las specs), el **Brand Engine**, vault encriptado, SSO y Facturación. Es el runtime que sostiene al MCP público. |
-| ⚙️ **Kernel MCP público** | **[`dark-research-mcp`](https://github.com/Opita-Code/dark-research-mcp)** | Servidor MCP (Go, stdio) que entrega **45 herramientas** a un agente IA: 15 de OSINT, 22 de vibe-flow CRUD (spec/artifact/drift CRUD), y 8 dark-ssd LLM-as-judge (brand match, compliance, drift detection, grounding, PII, prompt-injection, consensus). SQLite-backed `dark.db` compartido con `dark-eval`. |
-| 📦 **SDK de streaming** | **[`ocais`](https://github.com/Opita-Code/ocais)** | **OCAIS — Opita Code AI Stream.** SDK de streaming IA para AWS Lambda (~15 KB, zero deps, TypeScript-first). SSE first-class, AbortSignal + timeoutMs, structured output (Zod), tool execution multi-step. Lo consumen `vibe-studio` y `sociedad-opita-app` para su backend. |
-
----
-
-## 🛰️ Productos verticales (consumen el kernel) / Vertical products (consume the kernel)
+## Productos verticales (consumen el kernel)
 
 Cada producto demuestra una faceta distinta del kernel. Ninguno se construye fuera de la metodología vibe-flow.
 
 | Producto | Repositorio | Demo en vivo | Qué demuestra del kernel |
 |----------|-------------|--------------|---------------------------|
-| 🎨 **Vibe Studio** | **[`opita-vibe-studio`](https://github.com/Opita-Code/opita-vibe-studio)** | [vibe.opitacode.com](https://vibe.opitacode.com) | IDE de vibe-coding **en español** para estudiantes y creadores. Browser + desktop (Tauri v2). React 18, SST v4, multi-provider (DeepSeek + Gemini + OpenAI + Anthropic), BYOK. Consume el kernel MCP para governar cada generación. |
-| 🌐 **Opita Market** | **[`opita-market`](https://github.com/Opita-Code/opita-market)** | [market.opitacode.com](https://market.opitacode.com) | Marketplace multi-vertical colombiano (B2B+B2C). Dashboard de precios en tiempo real, directorio y comparador. **Astro 6 + SST Router + Aurora Postgres + DynamoDB**. Compliance Ley 1581/2012 (Habeas Data) desde el día 1 — el primer producto donde vibe-flow gates un MVP regulado. |
-| 🏛️ **Sociedad Opita** | **[`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app)** | — | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y 10 diálogos en streaming con `@opita/ocais`. Astro 6 + React 19 islands + SST v3 + Hono 4. |
-| 🧑‍💻 **Developer Web** | **[`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web)** | — | Portfolio y sitio de identidad del *Opita Developer*. Astro con estética *cyberpunk/gamer*, terminal interactiva, diagramas de arquitectura en vivo. Construido con vibe-flow como vitrina del kernel. |
-| 📚 **Web pública** | **[`www.opitacode.com`](https://github.com/Opita-Code/www.opitacode.com)** | [opitacode.com](https://www.opitacode.com) | Superficie pública corporativa. Astro v2 (en migración desde HTML plano) + AWS SAM + Supabase. Magic Link auth compartido con `vibe-ai-backend`. |
+| **Vibe Studio** | [`opita-vibe-studio`](https://github.com/Opita-Code/opita-vibe-studio) | [vibe.opitacode.com](https://vibe.opitacode.com) | IDE de vibe-coding **en español** para estudiantes y creadores. Browser + desktop (Tauri v2). Consume el kernel MCP para governar cada generación. |
+| **Opita Market** | `opita-market` *(privado)* | [market.opitacode.com](https://market.opitacode.com) | Marketplace multi-vertical colombiano (B2B + B2C). Dashboard de precios en tiempo real, directorio y comparador. Compliance Ley 1581/2012 (Habeas Data) desde el día 1 — el primer producto donde vibe-flow gates un MVP regulado. *(Repo privado desde 2026-07-28.)* |
+| **Sociedad Opita** | [`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app) | — | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y diálogos en streaming con `@opitacode/ocais`. Astro + SST, monolito `web/` + `api/`. |
+| **Developer Web** | [`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web) | — | Portfolio y sitio de identidad del *Opita Developer*. Estética cyberpunk/gamer, terminal interactiva, diagramas de arquitectura en vivo. Construido con vibe-flow como vitrina del kernel. |
+| **Web pública** | [`www.opitacode.com`](https://github.com/Opita-Code/www.opitacode.com) | [opitacode.com](https://www.opitacode.com) | Superficie pública corporativa. |
 
 ---
 
-## 📦 Archivado — reemplazados por `opita-os` / Archived — superseded by `opita-os`
+## Repositorios archivados
 
-Repos congelados como referencia histórica. La lógica que contenían migró al núcleo privado. No los usamos activamente.
+Repos congelados como referencia histórica. La lógica que contenían migró al runtime privado (`opita-os`) o a otro repo. No los usamos activamente.
 
-| Repositorio | Estado | Qué contenía / What it contained | Stack |
-|-------------|--------|----------------------------------|-------|
-| **[`opita-runtime`](https://github.com/Opita-Code/opita-runtime)** | 🔒 archive | Motor de ejecución gobernada. SDD workflow, provider chain, encrypted vault AES-256-GCM, plugin ecosystem con trust classes y risk tiers, 15+ stores. Rewrite in Rust (WIP en `rust-runtime/`). Reemplazado por `opita-os`. | Node.js ESM, Rust (WIP) |
-| **[`opita-sync-framework`](https://github.com/Opita-Code/opita-sync-framework)** | 🔒 archive | **Opita Sync Framework (OSF)** — kernel reusable de gobernanza: contracts, policy, runtime, evidence y operator surfaces. Opcional PostgreSQL (persistencia) y Cerbos (PDP). Reemplazado por `opita-os`. | Go 1.24+ |
+### Públicos (código público congelado, referencia histórica)
+
+| Repositorio | Qué contenía | Reemplazo |
+|---|---|---|
+| [`opita-runtime`](https://github.com/Opita-Code/opita-runtime) | Motor de ejecución gobernada. SDD workflow, provider chain, encrypted vault AES-256-GCM, plugin ecosystem con trust classes y risk tiers. | `opita-os` (privado) |
+| [`opita-sync-framework`](https://github.com/Opita-Code/opita-sync-framework) | Opita Sync Framework (OSF) — kernel reusable de gobernanza: contracts, policy, runtime, evidence y operator surfaces. Opcional PostgreSQL (persistencia) y Cerbos (PDP). | `opita-os` (privado) |
+
+### Privados (workspace / scratch interno)
+
+| Repositorio | Qué contenía |
+|---|---|
+| `dev.opitacode.com` | Dev environment del landing corporativo; consolidado en `www.opitacode.com`. |
+| `opitacode-workspace` | Workspace contenedor de proyectos experimentales. |
+| `v0` | Bootstrap inicial del org (antes de Opita-Code ser opita-code.com). |
 
 ---
 
-## 🔁 Cómo producimos cada producto / How we ship every product
+## Cómo producimos cada producto
 
 ```
    spec  →  artifact  →  drift  →  reconcile  →  publish
-    ↑          ↓            ↓          ↓            ↓
- OpenSpec   log/upload   dark_ssd   spec ↔ artifact   has_disclosure=true
-                                                    ↑
-                                          dark_ssd_compliance_check
-                                          dark_ssd_pii_detect
-                                          dark_ssd_prompt_injection_scan
+    │          │            │          │            │
+ OpenSpec   log/upload   judge   spec ↔ artifact   has_disclosure=true
+                                                    │
+                                          judge.eval_type:
+                                          compliance_check
+                                          pii_detect
+                                          prompt_injection_scan
 ```
 
-### 🇨🇴 Gobernanza de IA
-- **MCP-research es nuestro sistema nervioso:** cada agente que escribe código (en OpenSpec, en vibe-studio, en cualquier producto) tiene acceso al mismo set de 45 herramientas MCP — no duplicamos lógica entre repos.
-- **Vibe-Flow es nuestra modalidad de desarrollo:** escribimos la *spec* (en OpenSpec) **antes** de generar una sola línea. Cada artefacto se *loggea* con `dark_research_artifact_log`. Un juez LLM (`dark_ssd_drift_judge`) compara artefacto contra spec y emite verdict (`aligned | drift_detected | needs_human`). Sin `reconciled_at`, no hay publish.
-- **LLM-as-judge, no LLM-as-author:** publicamos artefactos críticos (synthetic media, contenido EU, código generado) solo después de que un juez LLM los audite contra specs, jurisdicciones y compliance. Cada verdict queda persistido en `sdd_evaluations` para auditoría.
+### Gobernanza de IA
 
-### 🇺🇸 AI Governance
-- **MCP-research is our nervous system:** every agent that writes code — whether for OpenSpec, Vibe Studio, or any vertical product — has access to the same 45 MCP tools. We don't duplicate logic across repos.
-- **Vibe-Flow is our development modality:** we write the *spec* (in OpenSpec) **before** generating a single line. Each artifact is *logged* via `dark_research_artifact_log`. An LLM judge (`dark_ssd_drift_judge`) compares the artifact against its spec and emits a verdict (`aligned | drift_detected | needs_human`). No `reconciled_at`, no publish.
-- **LLM-as-judge, not LLM-as-author:** we publish critical artifacts (synthetic media, EU-jurisdiction content, generated code) only after an LLM judge audits them against specs, jurisdictions, and compliance. Every verdict is persisted in `sdd_evaluations` for audit.
+- **dark-memory-mcp es nuestro sistema nervioso.** Cada agente que escribe código — sea para OpenSpec, Vibe Studio, o cualquier producto vertical — tiene acceso al mismo set de herramientas MCP via el namespace `RESEARCH` (OSINT), `JUDGE` (LLM-as-judge), `VIBE` (CRUD de ciclo), o `AGENT_MEMORY` (state cross-session). No duplicamos lógica entre repos.
+- **Vibe-Flow es nuestra modalidad de desarrollo.** Escribimos la *spec* (en OpenSpec) **antes** de generar una sola línea. Cada artefacto se *loggea* con `dark_memory_vibe_artifact_log`. Un juez LLM (`dark_memory_judge(eval_type=drift_judge)`) compara artefacto contra spec y emite verdict (`aligned | drift_detected | needs_human`). Sin `reconciled_at`, no hay publish.
+- **LLM-as-judge, no LLM-as-author.** Publicamos artefactos críticos (synthetic media, contenido EU, código generado) solo después de que un juez LLM los audite contra specs, jurisdicciones y compliance. Cada verdict queda persistido en `judgment_history` para auditoría.
+- **dark-research-mcp está en consolidación hacia dark-memory-mcp.** Los nombres legacy (`dark_research_*`, `dark_ssd_*`) emiten `X-Deprecation` headers y siguen funcionando como shims; los nombres canónicos ahora viven en el namespace `dark_memory_*`.
 
 ---
 
-## 🌎 Conectá con nosotros / Connect with us
+## Conectá con nosotros
 
-| Canal / Channel | Enlace / Link |
-|-----------------|---------------|
-| 🌐 **Sitio Web** | [opitacode.com](https://www.opitacode.com) |
-| 🧑‍💻 **Founder** | [Nicolás Urrutia](https://www.linkedin.com/in/nicourrutia98/) |
-| 📍 **Sede** | Neiva, Huila, Colombia |
-| 💬 **WhatsApp** | [wa.me/573126126085](https://wa.me/573126126085) |
+| Canal | Enlace |
+|-------|--------|
+| **Sitio Web** | [opitacode.com](https://www.opitacode.com) |
+| **Founder** | [Nicolás Urrutia](https://www.linkedin.com/in/nicourrutia98/) |
+| **Sede** | Neiva, Huila, Colombia 🇨🇴 |
+| **WhatsApp** | [wa.me/573126126085](https://wa.me/573126126085) |
 
 ---
 
@@ -114,4 +121,6 @@ Repos congelados como referencia histórica. La lógica que contenían migró al
   © 2026 Opita Code · Juan Nicolás Urrutia Salcedo
   <br>
   <i>Hecho con orgullo colombiano 🇨🇴 · Made in Colombia</i>
+  <br>
+  <sub>Última revisión del README: 2026-07-28 (audit hygiene pass)</sub>
 </p>
