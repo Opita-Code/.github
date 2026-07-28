@@ -56,8 +56,8 @@ Cada producto demuestra una faceta distinta del kernel. Ninguno se construye fue
 |----------|-------------|--------------|---------------------------|
 | **Vibe Studio** | [`opita-vibe-studio`](https://github.com/Opita-Code/opita-vibe-studio) | [vibe.opitacode.com](https://vibe.opitacode.com) | IDE de vibe-coding **en español** para estudiantes y creadores. Browser + desktop (Tauri v2). Consume el kernel MCP para governar cada generación. |
 | **Opita Market** | `opita-market` *(privado)* | [market.opitacode.com](https://market.opitacode.com) | Marketplace multi-vertical colombiano (B2B + B2C). Dashboard de precios en tiempo real, directorio y comparador. Compliance Ley 1581/2012 (Habeas Data) desde el día 1 — el primer producto donde vibe-flow gates un MVP regulado. *(Repo privado desde 2026-07-28.)* |
-| **Sociedad Opita** | [`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app) | — | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y diálogos en streaming con `@opitacode/ocais`. Astro + SST, monolito `web/` + `api/`. |
-| **Developer Web** | [`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web) | — | Portfolio y sitio de identidad del *Opita Developer*. Estética cyberpunk/gamer, terminal interactiva, diagramas de arquitectura en vivo. Construido con vibe-flow como vitrina del kernel. |
+| **Sociedad Opita** | [`sociedad-opita-app`](https://github.com/Opita-Code/sociedad-opita-app) | [sociedad.opitacode.com](https://sociedad.opitacode.com) | **Monumento digital vivo** del opita (Tello, Huila). Preservación del dialecto con 41 perfiles psicométricos validados (Big Five, Lomnitz, Dunbar) y diálogos en streaming con `@opitacode/ocais`. Astro + SST, monolito `web/` + `api/`. |
+| **Developer Web** | [`opita-developer-web`](https://github.com/Opita-Code/opita-developer-web) | [developer.opitacode.com](https://developer.opitacode.com) | Portfolio y sitio de identidad del *Opita Developer*. Estética cyberpunk/gamer, terminal interactiva, diagramas de arquitectura en vivo. Construido con vibe-flow como vitrina del kernel. |
 | **Web pública** | [`www.opitacode.com`](https://github.com/Opita-Code/www.opitacode.com) | [opitacode.com](https://www.opitacode.com) | Superficie pública corporativa. |
 
 ---
@@ -122,5 +122,5 @@ Repos congelados como referencia histórica. La lógica que contenían migró al
   <br>
   <i>Hecho con orgullo colombiano 🇨🇴 · Made in Colombia</i>
   <br>
-  <sub>Última revisión del README: 2026-07-28 (audit hygiene pass)</sub>
+  <sub>Última revisión del README: 2026-07-28 (audit hygiene pass + URL canonicalization de sociedad.opitacode.com y developer.opitacode.com)</sub>
 </p>
