@@ -33,7 +33,7 @@ graph TD
     WEB["www.opitacode.com<br/>Landing corporativa"]
     MK["opita-market (privado)<br/>Marketplace colombiano B2B+B2C"]
 
-    OS -.->|"runtime + specs"| DM
+    OS -.->|"runtime and specs"| DM
     DR -.->|"deprecation shims (since v0_7_x) — consolidate into dark-memory-mcp"| DM
     DM -.->|"consume kernel"| VS
     DM -.->|"consume kernel"| MK
