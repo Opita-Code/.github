@@ -33,17 +33,17 @@ graph TD
     WEB["www.opitacode.com<br/>Landing corporativa"]
     MK["opita-market (privado)<br/>Marketplace colombiano B2B+B2C"]
 
-    OS -.runtime + specs.-> DM
-    DR -.deprecation shims v0.7.0+ consolidate into.-> DM
-    DM -.consume kernel.-> VS
-    DM -.consume kernel.-> MK
-    DM -.consume kernel.-> SO
-    SDK -.streamText.-> VS
-    SDK -.streamText.-> SO
-    VS -.embed.-> WEB
-    MK -.serve.-> WEB
-    SO -.serve.-> WEB
-    DEV -.stand-alone.-> WEB
+    OS -.->|"runtime + specs"| DM
+    DR -.->|"deprecation shims (since v0_7_x) — consolidate into dark-memory-mcp"| DM
+    DM -.->|"consume kernel"| VS
+    DM -.->|"consume kernel"| MK
+    DM -.->|"consume kernel"| SO
+    SDK -.->|"streamText"| VS
+    SDK -.->|"streamText"| SO
+    VS -.->|"embed"| WEB
+    MK -.->|"serve"| WEB
+    SO -.->|"serve"| WEB
+    DEV -.->|"stand-alone"| WEB
 ```
 
 ---
@@ -122,5 +122,5 @@ Repos congelados como referencia histórica. La lógica que contenían migró al
   <br>
   <i>Hecho con orgullo colombiano 🇨🇴 · Made in Colombia</i>
   <br>
-  <sub>Última revisión del README: 2026-07-28 (audit hygiene pass + URL canonicalization de sociedad.opitacode.com y developer.opitacode.com)</sub>
+  <sub>Última revisión del README: 2026-07-28 (audit hygiene pass + URL canonicalization de sociedad.opitacode.com y developer.opitacode.com + Mermaid syntax repair tras "Lexical error on line 13" detectado por el renderer de GitHub — refs <code>-.label.-></code> con dots internos rotos, ahora todas en <code>-.->|"label"|</code>)</sub>
 </p>
