@@ -5,8 +5,6 @@
 
 **Estado: 2026-10-25.** Opita Code está en construcción y **no tiene nada desplegado en producción**. Lo que existe hoy es el repositorio canónico, el sitio que se genera desde el mismo código, y el kernel que lo gobierna.
 
-> **State: 2026-10-25.** Opita Code is under construction and **has nothing deployed in production**. What exists today is the canonical repository, the site generated from that same code, and the kernel that governs it. In one line: the runtime behind `opitacode.com` is being rebuilt around a memory that belongs to the person — every number measured, every change judged before it ships.
-
 ## La promesa
 
 > **Opita Code es el lugar donde tu memoria te pertenece.**
@@ -103,7 +101,7 @@ Qué hay en la organización, en qué estado y con qué fecha del último cambio
 graph TD
     CODE["Opita-Code/opita-code<br/>vibe-tools runtime · arquitectura · cumplimiento<br/>v0.4.0 · activo"]
     SITE["opita-code.github.io/opita-code<br/>sitio generado desde el mismo código"]
-    DM["dark-memory-mcp<br/>73 herramientas canónicas · 20 namespaces<br/>v4.0.0-alpha.32 · pre-release"]
+    DM["dark-memory-mcp<br/>73 + 3 herramientas · 20 namespaces<br/>v4.0.0-alpha.32 · pre-release"]
     DR["dark-research-mcp<br/>13 backends OSINT · v0.9.0"]
     SDK["@opitacode/ocais<br/>streaming SDK · v3.0.1"]
     VS["opita-vibe-studio<br/>en pausa"]
@@ -134,7 +132,7 @@ graph TD
 
 ### Repositorios privados
 
-`opita-market` (marketplace multi-vertical), `opita-trabajos`, `vibe-studio-desktop` (Wails v3 + Go + React), `opita-os` (SSOT, OpenSpec, brand engine, vault cifrado, SSO), `opita-os-engine`, `opita-account-ui`, `opita-pixel`, `opita-links`, `opita-market-templates`, `opita-scout`, `opita-sync`, `opita-go`, `vibe-landing`, `career-ops-pipeline`, `pi`.
+`opita-os` (SSOT, OpenSpec, brand engine, vault cifrado, SSO) y `opita-market` (marketplace multi-vertical) son los dos que la documentación pública ya nombra. Los demás siguen privados y no se nombran aquí: identidad y reputación, la aplicación de identidad, la extensión de escritorio, las plantillas de marketplace, el acortador de enlaces, las utilidades internas de mercado y el pipeline de selección de personal.
 
 ### Repositorios archivados
 
