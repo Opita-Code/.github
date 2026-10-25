@@ -103,7 +103,7 @@ Qué hay en la organización, en qué estado y con qué fecha del último cambio
 graph TD
     CODE["Opita-Code/opita-code<br/>vibe-tools runtime · arquitectura · cumplimiento<br/>v0.4.0 · activo"]
     SITE["opita-code.github.io/opita-code<br/>sitio generado desde el mismo código"]
-    DM["dark-memory-mcp<br/>73 + 3 herramientas · 20 namespaces<br/>v4.0.0-alpha.32 · pre-release"]
+    DM["dark-memory-mcp<br/>73 herramientas canónicas · 20 namespaces<br/>v4.0.0-alpha.32 · pre-release"]
     DR["dark-research-mcp<br/>13 backends OSINT · v0.9.0"]
     SDK["@opitacode/ocais<br/>streaming SDK · v3.0.1"]
     VS["opita-vibe-studio<br/>en pausa"]
